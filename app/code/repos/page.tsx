@@ -4,6 +4,7 @@ import { FaStar, FaCodeBranch, FaEye } from "react-icons/fa";
 const getRepos = async () => {
     const response = await fetch("https://api.github.com/users/ibrahimshittu/repos");
     const data = await response.json();
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
     return data;
 };
 
@@ -14,19 +15,19 @@ const ReposPage = async () => {
     return (
         <div className="repos-container">
             <h2>Repositories</h2>
-            <ul className="repos-list">
+            <ul className="repo-list">
                 {repos.map(
                     (repo: {
                         id: React.Key;
-                        name: String;
-                        full_name: String;
-                        description: String;
+                        name: string;
+                        full_name: string;
+                        description: string;
                         stargazers_count: React.ReactNode;
                         forks_count: React.ReactNode;
                         watchers_count: React.ReactNode;
                     }) => (
                         <li key={repo.id}>
-                            <Link href={`/repos/${repo.name}`}>
+                            <Link href={`/code/repos/${repo.name}`}>
                                 <h3>{repo.name}</h3>
                                 <p>{repo.description}</p>
                                 <div className="repo-details">
@@ -34,14 +35,14 @@ const ReposPage = async () => {
                                         <FaStar />
                                         {repo.stargazers_count}
                                     </span>
-                                    <div>
+                                    <span>
                                         <FaCodeBranch />
                                         {repo.forks_count}
-                                    </div>
-                                    <div>
+                                    </span>
+                                    <span>
                                         <FaEye />
                                         {repo.watchers_count}
-                                    </div>
+                                    </span>
                                 </div>
                             </Link>
                         </li>
