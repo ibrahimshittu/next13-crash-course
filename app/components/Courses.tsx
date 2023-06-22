@@ -1,18 +1,17 @@
+import { NextPage } from "next";
 import Link from "next/link";
 
-const fetchCourses = async () => {
-    const response = await fetch("http://localhost:3000/api/courses", {
-        next: {
-            revalidate: 60,
-        },
-    });
-    const data = await response.json();
-    return data;
+type PageProps = {
+    courses: {
+        id: React.Key;
+        title: string;
+        description: string;
+        link: string;
+        level: string;
+    }[];
 };
 
-const Courses = async () => {
-    const courses = await fetchCourses();
-
+const Courses: NextPage<PageProps> = async ({ courses }) => {
     return (
         <div className="courses">
             <h2>Courses</h2>
