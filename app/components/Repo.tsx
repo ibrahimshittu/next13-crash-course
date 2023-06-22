@@ -7,7 +7,11 @@ type PageProps = {
 };
 
 const getRepos = async (name: string) => {
-    const response = await fetch(`https://api.github.com/repos/ibrahimshittu/${name}`);
+    const response = await fetch(`https://api.github.com/repos/ibrahimshittu/${name}`, {
+        next: {
+            revalidate: 60,
+        },
+    });
     const data = await response.json();
     return data;
 };

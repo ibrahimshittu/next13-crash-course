@@ -2,7 +2,11 @@ import Link from "next/link";
 import { FaStar, FaCodeBranch, FaEye } from "react-icons/fa";
 
 const getRepos = async () => {
-    const response = await fetch("https://api.github.com/users/ibrahimshittu/repos");
+    const response = await fetch("https://api.github.com/users/ibrahimshittu/repos", {
+        next: {
+            revalidate: 60,
+        },
+    });
     const data = await response.json();
     // await new Promise((resolve) => setTimeout(resolve, 1000));
     return data;
@@ -11,7 +15,6 @@ const getRepos = async () => {
 const ReposPage = async () => {
     const repos = await getRepos();
 
-    console.log(repos);
     return (
         <div className="repos-container">
             <h2>Repositories</h2>
